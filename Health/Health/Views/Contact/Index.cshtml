@@ -1,0 +1,136 @@
+﻿<div ng-app="myapp">
+    <div ng-controller="ContactCtrl">
+        <form novalidate name="frmContact" id="frmContact" class="form-horizontal row-border">
+            <br />
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                Add Contact
+            </button>
+
+            <div class="modal fade" id="modal-default">
+                <div class="modal-dialog" style="left:0% !important;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title">Default Modal</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="col-md-12">
+                                <div class="form-group" ng-class="{'has-error':frmContact.FirstName.$error.required && frmContact.FirstName.$touched}">
+                                    <label class="col-md-4 control-label" for="input17"> First Name</label>
+                                    <div class="col-md-7">
+                                        <i class="warning" data-original-title="Required" ng-show="frmContact.FirstName.$touched && frmContact.FirstName.$error.required"></i>
+                                        <input type="text" id="idFirstName" class="form-control" name="FirstName" ng-model="firstName" required />
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error':frmContact.LastName.$error.required && frmContact.LastName.$touched}">
+                                    <label class="col-md-4 control-label" for="input17"> Last Name</label>
+                                    <div class="col-md-7">
+                                        <i class="warning" data-original-title="Required" ng-show="frmContact.LastName.$touched && frmContact.LastName.$error.required"></i>
+                                        <input type="text" id="idLastName" class="form-control" name="LastName" ng-model="lasttName" required />
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error':frmContact.nameEmail.$error.required && frmContact.nameEmail.$touched}">
+                                    <label class="col-md-4 control-label" for="input17"> Email</label>
+                                    <div class="col-md-7">
+                                        <i class="warning" data-original-title="Required" ng-show="frmContact.nameEmail.$touched && frmContact.nameEmail.$error.required"></i>
+                                        <input type="email" id="idEmail" class="form-control" name="nameEmail" ng-model="email" required />
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error':frmContact.namePhone.$error.required && frmContact.namePhone.$touched}">
+                                    <label class="col-md-4 control-label" for="input17"> Phone</label>
+                                    <div class="col-md-7">
+                                        <i class="warning" data-original-title="Required" ng-show="frmContact.namePhone.$touched && frmContact.namePhone.$error.required"></i>
+                                        <input type="tel" id="phone" class="form-control" name="namePhone" ng-model="phone" minlength="7" maxlength="10" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="input17"> Status</label>
+                                    <div class="col-md-7">
+                                        <input type="radio" name="gender" value="Active" checked ng-model="status" />Active
+                                        <input type="radio" name="gender" value="InActive" ng-model="status" />InActive
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                    </div>
+                                    <div class="col-md-7">
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer" style="margin-top:213px !important;">
+                            <span id="save" class="btn btn-default pull-left" ng-click="Clear()">
+                                <i class="icon-save"></i> Clear
+                            </span>
+
+                            <span id="save" class="btn btn-primary" ng-click="SaveUpdate()" ng-disabled="frmContact.$invalid" data-dismiss="modal">
+                                <i class="icon-save"></i> {{btnText}}
+                            </span>
+
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+
+
+            <div class="clearfix"></div>
+         <br />
+
+
+
+            
+
+
+            <table class="table table-bordered">
+                <tr>
+                    <th style="display:none">ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr ng-repeat="dataModel in contactss">
+                    <td style="display:none">{{dataModel.ID}}</td>
+                    <td> {{dataModel.FirstName}}</td>
+                    <td> {{dataModel.LastName}}</td>
+                    <td>{{dataModel.Email}}</td>
+                    <td>{{dataModel.Phone}}</td>
+                    <td>{{dataModel.Status}}</td>
+                    <td style="text-align:right; color:white">
+                        <span>
+                            <span id="save" class="btn btn-primary margin-right-btn" ng-click="GetContactByID(dataModel)" data-toggle="modal" data-target="#modal-default">
+                                Edit
+                            </span>
+                        </span>
+                    </td>
+                    <td style="text-align:right; color:white">
+                        <span>
+                            <span id="save" class="btn btn-danger margin-right-btn" ng-click="DeleteContact(dataModel)">
+                                Delete
+                            </span>
+                        </span>
+                    </td>
+                </tr>
+               
+            </table>
+            <br />
+            <br />
+
+        </form>
+    </div>
+</div>
+
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/ScriptsNg/Module/app.js"></script>
+<script src="~/ScriptsNg/Controller/ContactCtrl.js"></script>
+<script src="~/ScriptsNg/Services/CrudService.js"></script>
